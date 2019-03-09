@@ -140,10 +140,13 @@
 					var updateFn = updater[type + 'Update'];
 					
 					updateFn && updateFn( node,this._getVmVal( vm,exp ) );
-					
-//					new Watcher( vm,exp,function( val,oldVal ){
-//						updateFn && updateFn( node,val,oldVal )
-//					} )
+					/*
+					 * 给每一个data对应的属性 new一个监视者
+					 * @params:callback 用于监听该属性值发生变化后 重新渲染页面   数据驱动页面
+					 */
+					new Watcher( vm,exp,function( val,oldVal ){
+						updateFn && updateFn( node,val,oldVal )
+					} )
 				},
 				//定义获取属性val的函数
 				_getVmVal:function( vm,exp ){

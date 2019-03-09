@@ -14,25 +14,25 @@
 	<body>
 		<div id="test">
 			{{name}}
-			<p v-on:click="sayHellow"></p>
-			<p v-html="msg"></p>
-			<p v-class="test1" class="test2"></p>
+			<p v-on:click="sayHellow">点我</p>
 		</div>
+		
+		<script src="js/observer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/watcher.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/compile.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			new Vue({
-				el:'test',
+				el:'#test',
 				data:{
 					name:'你好',
-					msg:'<a>我很好</a>',
-					test1:'test1'
 				},
 				methods:{
 					sayHellow:function(){
-						console.log(this.name)
+						this.name = '谢斌'
 					}
 				}
+				
 			})
 		</script>
 	</body>

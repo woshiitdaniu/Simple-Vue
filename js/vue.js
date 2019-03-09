@@ -12,13 +12,18 @@
 						arr.push( keys );
 					}
 				}
-				
-				var obj2Compile =  new Compile( this.$options.el || document.body,this )
-				obj2Compile.inits();
-				//循环数组
+				//数据代理
 				arr.forEach(function( key ){
 					vm.proxy( key )
 				})
+				//数据劫持
+				observer(data,this);
+				console.log(data)
+				//模板解析
+				var obj2Compile =  new Compile( this.$options.el || document.body,this )
+				obj2Compile.inits();
+			
+				
 			};
 			
 			Vue.prototype = {
