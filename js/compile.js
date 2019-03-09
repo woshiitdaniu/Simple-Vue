@@ -131,10 +131,35 @@
 					this.binds( node,vm,exp,'html' );
 				},
 				//解析class
-				 class:function( node,vm,exp ){
+				class:function( node,vm,exp ){
 				 	this.binds( node,vm,exp,'class' );
 				 },
-				//定义指令绑定函数
+				//解析v-model
+				model:function( node,vm,exp ){
+					this.binds( node,vm,exp,'model' );
+					
+					var _this = this,
+						val   = this._getVmVal( vm,exp );
+					//给当前的节点绑定事件监听
+					node.addEventListener('input',function( e ){
+						var newVal = e.target.value;
+						if( val === newVal ){
+							return;
+						}
+						
+						_this.setVmVal( vm,exp,newVal );
+						val = newVal;
+					})
+				},
+				setVmVal:function( vm,exp,newVal ){
+					if( vm._data.hasOwnProperty( exp ) ){
+						vm._data[exp] = newVal
+					}else{
+						return
+					}			
+				},
+				 
+				//定义指令绑定函数 并给属性设置监视者
 				binds:function( node,vm,exp,type ){
 					//根据type来获取对应的处理函数
 					var updateFn = updater[type + 'Update'];
@@ -199,5 +224,9 @@
 					
 //					node.className = className? className +' '+val : val;
 					
+				},
+				//model更新函数
+				modelUpdate:function( node,val,oldVal ){
+					node.value = typeof val == 'undefined'?'':val;
 				}
 			}

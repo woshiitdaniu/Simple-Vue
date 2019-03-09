@@ -15,6 +15,9 @@
 		<div id="test">
 			{{name}}
 			<p v-on:click="sayHellow">点我</p>
+			<input v-model="changeMsg" />
+			{{changeMsg}}
+			
 		</div>
 		
 		<script src="js/observer.js" type="text/javascript" charset="utf-8"></script>
@@ -26,6 +29,7 @@
 				el:'#test',
 				data:{
 					name:'你好',
+					changeMsg:'hellow Vue'
 				},
 				methods:{
 					sayHellow:function(){

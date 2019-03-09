@@ -17,8 +17,7 @@
 					vm.proxy( key )
 				})
 				//数据劫持
-				observer(data,this);
-				console.log(data)
+				observer(data,this);				
 				//模板解析
 				var obj2Compile =  new Compile( this.$options.el || document.body,this )
 				obj2Compile.inits();
